@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.1.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/profskipulag/SS5403:
+      branch: main
+      repo: https://github.com/profskipulag/SS5403.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/profskipulag/SS5403 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-razzmatazz-angora.sh
+        container: qc.acc_nerdy-heliotrope-grouse
+  QC.Doc:
+    repos:
+      github.com/profskipulag/SS5403 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-teal-falcon.sh
+        container: qc.doc_frumpy-chocolate-koala
+      github.com/profskipulag/SS5403 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-jade-eleuth.sh
+        container: qc.doc_fuzzy-cardinal-dragon
+      github.com/profskipulag/SS5403 markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-lilac-squid.sh
+        container: qc.doc_homey-wheat-snake
+  QC.Lic:
+    repos:
+      github.com/profskipulag/SS5403 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-black-duck.sh
+        container: qc.lic_squirrely-aquamarine-wallaby
+  QC.Ver:
+    repos:
+      github.com/profskipulag/SS5403 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-lavender-caterpillar.sh
+        container: qc.ver_woozy-saffron-catfish
+timeout: 5400
